@@ -1,0 +1,194 @@
+@import './variables';
+
+.user-plan-page {
+  min-height: 100vh;
+  background-color: $color-background;
+  padding: $spacing-xl;
+
+  &__container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  // Loading and Empty States
+  &__loading,
+  &__empty {
+    min-height: 100vh;
+    background-color: $color-background;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__loading-text {
+    font-size: $font-size-lg;
+    color: $color-text-secondary;
+  }
+
+  &__empty-content {
+    text-align: center;
+    padding: $spacing-xl;
+  }
+
+  &__empty-title {
+    font-size: $font-size-2xl;
+    color: $color-text-primary;
+    margin-bottom: $spacing-md;
+  }
+
+  &__empty-description {
+    font-size: $font-size-base;
+    color: $color-text-secondary;
+  }
+
+  // Header Section
+  &__header {
+    background-color: $color-surface;
+    border-radius: $border-radius-large;
+    padding: $spacing-xl;
+    margin-bottom: $spacing-xl;
+    box-shadow: $shadow-medium;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    color: $color-primary;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__subtitle {
+    margin: 0;
+    font-size: $font-size-lg;
+    color: $color-text-secondary;
+    margin-bottom: $spacing-lg;
+  }
+
+  // Progress Section
+  &__progress {
+    background-color: $color-surface-light;
+    border-radius: $border-radius-large;
+    padding: $spacing-lg;
+  }
+
+  &__progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__progress-label {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+  }
+
+  &__progress-value {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $color-primary;
+  }
+
+  &__progress-bar {
+    width: 100%;
+    height: 12px;
+    background-color: $color-border;
+    border-radius: $border-radius-large;
+    overflow: hidden;
+  }
+
+  &__progress-fill {
+    height: 100%;
+    background-color: $color-secondary;
+    transition: $transition-medium;
+  }
+
+  // Week Summary Section
+  &__week-summary {
+    background-color: $color-surface;
+    border-radius: $border-radius-large;
+    padding: $spacing-xl;
+    margin-bottom: $spacing-xl;
+    box-shadow: $shadow-medium;
+    border: 2px solid $color-accent;
+  }
+
+  &__summary-title {
+    margin: 0;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin-bottom: $spacing-md;
+  }
+
+  &__summary-text {
+    margin: 0;
+    font-size: $font-size-base;
+    color: $color-text-secondary;
+    line-height: $line-height-relaxed;
+    margin-bottom: $spacing-md;
+  }
+
+  &__summary-note {
+    font-size: $font-size-sm;
+    color: $color-text-light;
+  }
+
+  // Suggestions Section
+  &__suggestions {
+    margin-bottom: $spacing-xl;
+  }
+
+  &__suggestions-title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin-bottom: $spacing-lg;
+  }
+
+  // Encouragement Card
+  &__encouragement {
+    background-color: $color-primary-light;
+    color: $color-surface;
+    border-radius: $border-radius-large;
+    padding: $spacing-xl;
+    text-align: center;
+    box-shadow: $shadow-medium;
+  }
+
+  &__encouragement-title {
+    margin: 0;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__encouragement-text {
+    margin: 0;
+    font-size: $font-size-base;
+  }
+
+  // Next Session Info
+  &__next-session {
+    margin-top: $spacing-xl;
+    background-color: $color-surface;
+    border-radius: $border-radius-large;
+    padding: $spacing-lg;
+    box-shadow: $shadow-small;
+    text-align: center;
+  }
+
+  &__next-session-label {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__next-session-date {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $color-primary;
+  }
+}

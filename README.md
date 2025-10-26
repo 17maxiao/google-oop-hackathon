@@ -1,17 +1,24 @@
-# React + Python Backend Application
+# CopeAI - Healthcare Therapy Companion App
 
-A full-stack application with a React frontend and Python Flask backend.
+A full-stack healthcare application that bridges the gap between therapy sessions and daily life. CopeAI analyzes therapy session transcripts using GenAI to generate personalized, actionable coping strategies with reminders, keeping patients engaged with their progress between sessions.
 
 ## Project Structure
 
 ```
 .
-├── frontend/          # React application
+├── frontend/                    # React application
 │   ├── src/
-│   ├── public/
+│   │   ├── components/         # Reusable React components
+│   │   │   └── SuggestionBox.js
+│   │   ├── pages/              # Page components
+│   │   │   ├── TreatmentPlanPage.js   # Therapist review interface
+│   │   │   └── UserPlanPage.js        # Patient wellness journey
+│   │   ├── theme.js            # Healthcare-friendly design system
+│   │   ├── App.js              # Main application with routing
+│   │   └── App.css
 │   └── package.json
-└── backend/           # Flask API server
-    ├── app.py
+└── backend/                     # Flask API server
+    ├── app.py                  # REST API with treatment plan endpoints
     └── requirements.txt
 ```
 
@@ -55,7 +62,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-The backend server will start on `http://localhost:5000`
+The backend server will start on `http://localhost:5001`
 
 ### Frontend Setup
 
@@ -76,21 +83,54 @@ npm start
 
 The React app will open in your browser at `http://localhost:3000`
 
+## User Journey
+
+1. **Transcription & AI Analysis** - After a therapy session, the transcript is analyzed by GenAI to generate a personalized treatment plan
+2. **Provider Review** - Therapist receives notification to review and approve the AI-generated coping strategies
+3. **Patient Engagement** - Approved plans are sent to patients with scheduled reminders throughout the week
+4. **Progress Tracking** - Patients complete activities and add reflective notes
+5. **Weekly Summary** - AI generates a summary of patient progress for both patient and therapist before the next session
+
 ## API Endpoints
 
-The backend provides the following endpoints:
+### Treatment Plan Endpoints (Therapist)
+- `GET /api/treatment-plan/pending` - Get pending treatment plans for review
+- `POST /api/treatment-plan/approve` - Approve and activate a treatment plan
+- `POST /api/treatment-plan/revise` - Request AI revision of treatment plan
+- `POST /api/treatment-plan/parse-transcript` - Generate plan from therapy transcript (GenAI integration point)
 
-- `GET /api/hello` - Returns a hello message with timestamp
-- `GET /api/data` - Returns a list of sample items
-- `POST /api/echo` - Echoes back the JSON data sent to it
+### User Plan Endpoints (Patient)
+- `GET /api/user-plan/current` - Get patient's current active wellness plan
+- `POST /api/user-plan/update-activity` - Update activity status and add notes
+- `GET /api/user-plan/summary` - Get AI-generated weekly progress summary
+
+### Notification Endpoints (Twilio Integration)
+- `POST /api/notifications/send` - Send notification to patient
+- `POST /api/notifications/schedule` - Schedule recurring notifications for a treatment plan
+
+### Legacy Endpoints
+- `GET /api/hello` - Health check
+- `GET /api/data` - Sample data
+- `POST /api/echo` - Echo test
 
 ## Features
 
-- React frontend with hooks (useState, useEffect)
-- Flask backend with CORS enabled
-- Example GET and POST requests
-- Real-time data fetching from backend
-- Clean separation of frontend and backend
+### Frontend
+- **Healthcare-friendly Design System** - Calming colors, accessible typography, thoughtful spacing
+- **Component Architecture** - Reusable SuggestionBox component shared between views
+- **Two Main Views**:
+  - **TreatmentPlanPage** - Therapist interface for reviewing and approving AI-generated plans
+  - **UserPlanPage** - Patient interface for tracking wellness activities and progress
+- **React Router** - Seamless navigation between patient and therapist views
+- **Real-time Progress Tracking** - Visual progress bars and completion rates
+- **Interactive Notes** - Patients can reflect on activities, therapists can review insights
+
+### Backend
+- **RESTful API** - Clean separation of concerns with dedicated endpoint groups
+- **In-memory Demo Data** - Pre-populated sample treatment and user plans
+- **GenAI Integration Points** - Endpoints ready for AI transcript analysis and summary generation
+- **Activity Logging** - Tracks all patient interactions for analysis
+- **Flexible Data Models** - Supports multiple activity types (journaling, exercise, breathing, custom)
 
 ## Development
 
@@ -114,14 +154,36 @@ npm start
 ## Technologies Used
 
 ### Frontend
-- React 18
+- React 19
+- React Router DOM
 - JavaScript (ES6+)
-- Fetch API
+- Fetch API for backend communication
+- Custom theme system with healthcare-focused design
 
 ### Backend
-- Python 3
-- Flask
-- Flask-CORS
+- Python 3.12
+- Flask - Web framework
+- Flask-CORS - Cross-origin resource sharing
+- UUID - Unique identifiers for entities
+
+## Demo Data
+
+The application comes pre-loaded with sample data to demonstrate the full user journey:
+
+- **Sample Treatment Plan** - A pending plan for "Sarah Johnson" with 4 coping strategies
+- **Sample User Plan** - An active plan showing various completion states and patient notes
+- **Sample Week Summary** - AI-generated insights based on patient activity
+
+## Future Enhancements
+
+- [ ] GenAI integration for transcript analysis (OpenAI/Anthropic)
+- [ ] Twilio SMS notifications for patient reminders
+- [ ] User authentication and authorization
+- [ ] Database integration (PostgreSQL/MongoDB)
+- [ ] Scheduling system for automated reminders
+- [ ] Analytics dashboard for therapists
+- [ ] Mobile-responsive improvements
+- [ ] Accessibility enhancements (WCAG compliance)
 
 ## License
 

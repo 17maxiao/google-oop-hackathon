@@ -1,91 +1,91 @@
-import { useState, useEffect } from 'react';
-import './App.css';
+import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
+import TreatmentPlanPage from './pages/TreatmentPlanPage';
+import UserPlanPage from './pages/UserPlanPage';
+import './styles/App.scss';
 
-function App() {
-  const [message, setMessage] = useState('');
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+function NavigationBar() {
+  const navigate = useNavigate();
+  const [isResetting, setIsResetting] = useState(false);
 
-  useEffect(() => {
-    // Fetch hello message from backend
-    fetch('http://localhost:5001/api/hello')
-      .then(response => response.json())
-      .then(data => {
-        setMessage(data.message);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error('Error fetching hello message:', error);
-        setLoading(false);
-      });
+  const handleResetDemo = async () => {
+    if (!window.confirm('This will reset all demo data. Continue?')) {
+      return;
+    }
 
-    // Fetch data items from backend
-    fetch('http://localhost:5001/api/data')
-      .then(response => response.json())
-      .then(data => {
-        setItems(data.items);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
+    setIsResetting(true);
 
-  const handleTestPost = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/echo', {
+      const response = await fetch('http://localhost:5001/api/demo/reset', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ test: 'Hello from React!' }),
       });
+
       const data = await response.json();
-      alert(`Backend received: ${JSON.stringify(data.received)}`);
+
+      if (data.success) {
+        // Navigate to therapist view to show the new pending treatment plan
+        navigate('/therapist');
+
+        // Force reload the current page to fetch fresh data
+        window.location.reload();
+      } else {
+        alert('Failed to reset demo. Please try again.');
+      }
     } catch (error) {
-      console.error('Error posting data:', error);
+      console.error('Error resetting demo:', error);
+      alert('Error resetting demo. Please check if backend is running.');
+    } finally {
+      setIsResetting(false);
     }
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>React + Python Backend</h1>
+    <nav className="app-nav">
+      <div className="nav-content">
+        <div className="nav-logo">
+          CopeAI
+        </div>
 
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <div>
-            <p>{message}</p>
+        <div className="nav-links">
+          <Link to="/user" className="nav-link">
+            Patient View
+          </Link>
 
-            <div style={{ marginTop: '2rem' }}>
-              <h2>Items from Backend:</h2>
-              <ul style={{ listStyle: 'none', padding: 0 }}>
-                {items.map(item => (
-                  <li key={item.id} style={{ margin: '1rem 0' }}>
-                    <strong>{item.name}</strong>: {item.description}
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <Link to="/therapist" className="nav-link">
+            Therapist Review
+          </Link>
 
-            <button
-              onClick={handleTestPost}
-              style={{
-                marginTop: '2rem',
-                padding: '0.5rem 1rem',
-                fontSize: '1rem',
-                cursor: 'pointer',
-                backgroundColor: '#61dafb',
-                border: 'none',
-                borderRadius: '4px'
-              }}
-            >
-              Test POST Request
-            </button>
-          </div>
-        )}
-      </header>
-    </div>
+          <button
+            onClick={handleResetDemo}
+            disabled={isResetting}
+            className="nav-reset-button"
+          >
+            <span>{isResetting ? '⏳' : '🔄'}</span>
+            <span>{isResetting ? 'Resetting...' : 'Reset Demo'}</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <div className="app-container">
+        <NavigationBar />
+
+        {/* Routes */}
+        <Routes>
+          <Route path="/" element={<Navigate to="/user" replace />} />
+          <Route path="/user" element={<UserPlanPage />} />
+          <Route path="/therapist" element={<TreatmentPlanPage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
