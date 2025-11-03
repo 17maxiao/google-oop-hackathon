@@ -1,0 +1,77 @@
+.app-container {
+  min-height: 100vh;
+  background-color: #F8FAFB;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif;
+}
+
+/* Navigation Bar */
+.app-nav {
+  background-color: #FFFFFF;
+  padding: 1rem 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid #E0E7ED;
+}
+
+.nav-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #4A90A4;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #5A6C7D;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: 150ms ease-in-out;
+}
+
+.nav-link:hover {
+  background-color: #F5F7F9;
+  color: #4A90A4;
+}
+
+.nav-reset-button {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: #E8A87C;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 150ms ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.nav-reset-button:hover {
+  background-color: #FFCC99;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.nav-reset-button:active {
+  transform: scale(0.98);
+}
+
+.nav-reset-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
